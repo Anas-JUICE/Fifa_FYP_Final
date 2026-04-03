@@ -1,115 +1,139 @@
-from pathlib import Path
 import sys
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.append(str(SRC))
 
-import pandas as pd
 import streamlit as st
+import pandas as pd
+from utils.helpers import load_team_profiles, predict_match_proba
 
-from utils.helpers import load_team_profiles, predict_match_proba, load_json, BEST_MODEL_SUMMARY_PATH
+st.set_page_config(page_title="FIFA World Cup Predictor", layout="wide")
+st.title("FIFA World Cup Match Predictor & Tournament Simulation")
 
-st.set_page_config(page_title="FIFA World Cup Match Predictor", layout="wide")
-st.title("FIFA World Cup Match Predictor")
-
+# ---------- Load data ----------
 profiles_df = load_team_profiles()
-profiles_dict = {row["team"]: row for _, row in profiles_df.iterrows()}
-teams = sorted(profiles_df["team"].tolist())
-best_summary = load_json(BEST_MODEL_SUMMARY_PATH) if BEST_MODEL_SUMMARY_PATH.exists() else {"best_model_name": "best_model_not_generated_yet"}
+teams = profiles_df["team"].sort_values().tolist()
 
-st.caption(f"Selected best model: {best_summary['best_model_name']}")
+simulation_path = ROOT / "results" / "worldcup_simulation_results.csv"
+groups_path = ROOT / "results" / "auto_seeded_groups.csv"
 
-col1, col2 = st.columns(2)
+# ---------- Navigation ----------
+page = st.sidebar.radio(
+    "Go to",
+    ["Match Prediction", "Tournament Simulation"]
+)
 
-with col1:
-    team_a = st.selectbox("Team A", teams, index=0)
+# =========================================================
+# MATCH PREDICTION PAGE
+# =========================================================
+if page == "Match Prediction":
+    st.header("Match Prediction")
 
-with col2:
-    default_index = 1 if len(teams) > 1 else 0
-    team_b = st.selectbox("Team B", teams, index=default_index)
+    col1, col2 = st.columns(2)
 
-settings_col1, settings_col2, settings_col3 = st.columns(3)
-with settings_col1:
+    with col1:
+        team_a = st.selectbox("Team A", teams, index=0)
+
+    with col2:
+        default_index = 1 if len(teams) > 1 else 0
+        team_b = st.selectbox("Team B", teams, index=default_index)
+
     neutral = st.checkbox("Neutral ground", value=True)
-with settings_col2:
     match_importance = st.slider("Match importance", min_value=1.0, max_value=5.0, value=5.0, step=1.0)
-with settings_col3:
     tournament = st.text_input("Tournament", value="FIFA World Cup")
 
-def profile_table(team_name: str):
-    row = profiles_dict[team_name]
-    return pd.DataFrame({
-        "Metric": ["Elo", "Wins Last 5", "Draws Last 5", "Losses Last 5", "GF Avg Last 5", "GA Avg Last 5", "GD Avg Last 5", "Last Seen Date"],
-        "Value": [row["elo"], row["wins_last5"], row["draws_last5"], row["loss_last5"], row["gf_avg_last5"], row["ga_avg_last5"], row["gd_avg_last5"], row["last_seen_date"]]
-    })
+    if st.button("Predict"):
+        if team_a == team_b:
+            st.error("Pick two different teams.")
+        else:
+            result = predict_match_proba(
+                team_a=team_a,
+                team_b=team_b,
+                tournament=tournament,
+                neutral=neutral,
+                match_importance=match_importance
+            )
 
-profile_col1, profile_col2 = st.columns(2)
-with profile_col1:
-    st.subheader(team_a)
-    st.dataframe(profile_table(team_a), use_container_width=True, hide_index=True)
-with profile_col2:
-    st.subheader(team_b)
-    st.dataframe(profile_table(team_b), use_container_width=True, hide_index=True)
+            probs_df = pd.DataFrame({
+                "Outcome": [f"{team_a} Win", "Draw", f"{team_b} Win"],
+                "Probability": [result["team_a_win"], result["draw"], result["team_b_win"]]
+            })
 
-if st.button("Predict Match Outcome", use_container_width=True):
-    if team_a == team_b:
-        st.error("Please choose two different teams.")
+            winner_idx = probs_df["Probability"].idxmax()
+            predicted_outcome = probs_df.loc[winner_idx, "Outcome"]
+            confidence = probs_df.loc[winner_idx, "Probability"]
+
+            st.subheader(f"{team_a} vs {team_b}")
+            st.success(f"Predicted outcome: {predicted_outcome} ({confidence:.2%})")
+
+            profile_a = profiles_df[profiles_df["team"] == team_a].iloc[0]
+            profile_b = profiles_df[profiles_df["team"] == team_b].iloc[0]
+
+            st.markdown("### Team Comparison")
+            compare_df = pd.DataFrame({
+                "Feature": ["Elo", "Wins (last 5)", "Draws (last 5)", "Losses (last 5)", "GF Avg (last 5)", "GA Avg (last 5)", "GD Avg (last 5)"],
+                team_a: [
+                    profile_a["elo"], profile_a["wins_last5"], profile_a["draws_last5"], profile_a["loss_last5"],
+                    profile_a["gf_avg_last5"], profile_a["ga_avg_last5"], profile_a["gd_avg_last5"]
+                ],
+                team_b: [
+                    profile_b["elo"], profile_b["wins_last5"], profile_b["draws_last5"], profile_b["loss_last5"],
+                    profile_b["gf_avg_last5"], profile_b["ga_avg_last5"], profile_b["gd_avg_last5"]
+                ]
+            })
+            st.dataframe(compare_df, use_container_width=True)
+
+            elo_diff = float(profile_a["elo"]) - float(profile_b["elo"])
+            if elo_diff > 0:
+                st.info(f"{team_a} has the higher Elo rating by {elo_diff:.0f} points.")
+            elif elo_diff < 0:
+                st.info(f"{team_b} has the higher Elo rating by {abs(elo_diff):.0f} points.")
+            else:
+                st.info("Both teams have the same Elo rating.")
+
+            st.markdown("### Prediction Probabilities")
+            st.dataframe(probs_df, use_container_width=True)
+            st.bar_chart(probs_df.set_index("Outcome"))
+
+# =========================================================
+# TOURNAMENT SIMULATION PAGE
+# =========================================================
+else:
+    st.header("Tournament Simulation Results")
+
+    if not simulation_path.exists():
+        st.warning("Simulation results file not found. Run tournament_simulation.py first.")
     else:
-        result = predict_match_proba(
-            team_a=team_a,
-            team_b=team_b,
-            model_name="best",
-            tournament=tournament,
-            neutral=neutral,
-            match_importance=match_importance
+        sim_df = pd.read_csv(simulation_path)
+
+        st.markdown("### Stage Probabilities")
+        st.dataframe(sim_df, use_container_width=True)
+
+        top_n = st.slider("Show top teams", min_value=5, max_value=20, value=10, step=1)
+        sort_by = st.selectbox(
+            "Sort by",
+            [
+                "champion_probability",
+                "final_probability",
+                "semifinal_probability",
+                "quarterfinal_probability",
+                "qualify_probability"
+            ],
+            index=0
         )
 
-        probs_df = pd.DataFrame({
-            "Outcome": [f"{team_a} Win", "Draw", f"{team_b} Win"],
-            "Probability": [result["team_a_win"], result["draw"], result["team_b_win"]]
-        })
+        view_df = sim_df.sort_values(sort_by, ascending=False).head(top_n)
 
-        predicted_probability = probs_df["Probability"].max()
-        st.success(f"Predicted outcome: {result['predicted_outcome']} ({predicted_probability:.2%})")
+        st.markdown(f"### Top {top_n} Teams by {sort_by}")
+        st.dataframe(view_df, use_container_width=True)
 
-        stat1, stat2, stat3 = st.columns(3)
-        with stat1:
-            st.metric(f"{team_a} Win", f"{result['team_a_win']:.2%}")
-        with stat2:
-            st.metric("Draw", f"{result['draw']:.2%}")
-        with stat3:
-            st.metric(f"{team_b} Win", f"{result['team_b_win']:.2%}")
+        chart_df = view_df.set_index("team")[[sort_by]]
+        st.bar_chart(chart_df)
 
-        st.subheader("Probability Table")
-        st.dataframe(probs_df, use_container_width=True, hide_index=True)
-
-        st.subheader("Probability Chart")
-        st.bar_chart(probs_df.set_index("Outcome"))
-
-        a = profiles_dict[team_a]
-        b = profiles_dict[team_b]
-        insights = []
-
-        elo_diff = float(a["elo"]) - float(b["elo"])
-        if abs(elo_diff) >= 50:
-            higher = team_a if elo_diff > 0 else team_b
-            insights.append(f"{higher} has the stronger Elo rating by {abs(elo_diff):.0f} points.")
-
-        gd_diff = float(a["gd_avg_last5"]) - float(b["gd_avg_last5"])
-        if abs(gd_diff) >= 0.5:
-            better_form = team_a if gd_diff > 0 else team_b
-            insights.append(f"{better_form} comes in with the better recent goal-difference form.")
-
-        ga_diff = float(a["ga_avg_last5"]) - float(b["ga_avg_last5"])
-        if abs(ga_diff) >= 0.4:
-            stronger_defense = team_a if ga_diff < 0 else team_b
-            insights.append(f"{stronger_defense} looks stronger defensively based on recent goals conceded.")
-
-        if not insights:
-            insights.append("The matchup looks balanced, which usually increases uncertainty and draw chance.")
-
-        st.subheader("Matchup Insights")
-        for item in insights:
-            st.write(f"- {item}")
+    if groups_path.exists():
+        st.markdown("### Seeded Groups")
+        groups_df = pd.read_csv(groups_path)
+        st.dataframe(groups_df, use_container_width=True)
