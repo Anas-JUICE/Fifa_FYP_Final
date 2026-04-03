@@ -81,3 +81,17 @@ This makes the final choice more fair for the draw class, which is usually the h
 - The processed team profiles are created automatically in `data/processed/`.
 - The simulation uses the selected best model by default.
 - The World Cup simulation assumes a 48-team format with 12 groups, top 2 from each group, plus the best 8 third-place teams.
+
+# FIFA FYP Final
+
+Machine learning-based football match prediction and tournament simulation system.
+
+## Live Demo
+[Streamlit App](https://fifafypfinal-sgbn94axknrx2vgiss2qlc.streamlit.app/)
+
+## Features
+- Match prediction
+- Tournament simulation
+- Model comparison: Logistic Regression, Random Forest, XGBoost
+- Best-model selection
+- Streamlit web app

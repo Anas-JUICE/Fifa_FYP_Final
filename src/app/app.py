@@ -10,6 +10,7 @@ import streamlit as st
 import pandas as pd
 from utils.helpers import load_team_profiles, predict_match_proba
 
+st.markdown("[Open deployed app link](https://fifafypfinal-sgbn94axknrx2vgiss2qlc.streamlit.app/)")
 st.set_page_config(page_title="FIFA World Cup Predictor", layout="wide")
 st.title("FIFA World Cup Match Predictor & Tournament Simulation")
 
