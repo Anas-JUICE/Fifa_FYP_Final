@@ -1,0 +1,17 @@
+{
+  "selection_rule": [
+    "highest balanced accuracy",
+    "highest accuracy",
+    "lowest log loss"
+  ],
+  "best_model_name": "logistic",
+  "comparison_table_path": "C:\\Users\\anasb\\Desktop\\Fifa_FYP_Final\\results\\model_comparison.csv",
+  "chosen_metrics": {
+    "accuracy": 0.5797938144329897,
+    "balanced_accuracy": 0.5397091337877072,
+    "log_loss": 0.8914379900838775,
+    "training_seconds": 0.20526432991027832,
+    "draw_recall": 0.2768959435626102,
+    "draw_f1": 0.29182156133828996
+  }
+}

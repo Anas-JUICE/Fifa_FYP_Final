@@ -1,0 +1,83 @@
+feature,importance
+num__elo_diff,0.20913019423960338
+num__elo_B,0.10981519127440054
+num__elo_A,0.10248003800184644
+num__A_gd_avg_last5,0.05998879408360583
+num__B_gd_avg_last5,0.05939360853722912
+num__A_ga_avg_last5,0.051384671559711145
+num__B_ga_avg_last5,0.050082451692325454
+num__A_gf_avg_last5,0.04979228048107335
+num__B_gf_avg_last5,0.04924514204281363
+num__A_loss_last5,0.02903616063917209
+num__B_loss_last5,0.02776363215420091
+num__B_wins_last5,0.027540507695327017
+num__A_wins_last5,0.027055802192273933
+num__B_draws_last5,0.026720249958743225
+num__A_draws_last5,0.026057308160166336
+num__match_importance,0.01952897838256128
+cat__neutral_False,0.010735517487452044
+cat__neutral_True,0.010664638314873286
+cat__tournament_Friendly,0.010305713487873772
+cat__tournament_FIFA World Cup qualification,0.007271895648425758
+cat__tournament_UEFA Euro qualification,0.0048132086727993
+cat__tournament_African Cup of Nations qualification,0.004518607080922852
+cat__tournament_UEFA Nations League,0.0025434168197470872
+cat__tournament_CECAFA Cup,0.001988798312067677
+cat__tournament_COSAFA Cup,0.0019171304885051406
+cat__tournament_AFC Asian Cup qualification,0.0016616991682298612
+cat__tournament_Copa América,0.001551237747306873
+cat__tournament_African Cup of Nations,0.0015145030835096063
+cat__tournament_FIFA World Cup,0.0014766880689841115
+cat__tournament_UEFA Euro,0.0014430424795304926
+cat__tournament_AFF Championship,0.0013221498412293198
+cat__tournament_Gold Cup,0.0012131396275137625
+cat__tournament_CFU Caribbean Cup qualification,0.0007958834984234566
+cat__tournament_AFC Asian Cup,0.0007878180791157228
+cat__tournament_WAFF Championship,0.0007416646885662717
+cat__tournament_Gulf Cup,0.0007247060149422746
+cat__tournament_SAFF Cup,0.0007097682331161287
+cat__tournament_CFU Caribbean Cup,0.000706773896585812
+cat__tournament_AFC Challenge Cup qualification,0.0007028402656386795
+cat__tournament_AFC Challenge Cup,0.0006282275754549072
+cat__tournament_Indian Ocean Island Games,0.0004132441992018667
+cat__tournament_Confederations Cup,0.0003569232582369551
+cat__tournament_AFF Championship qualification,0.0003065793529056939
+cat__tournament_CONCACAF Nations League,0.0002971107745681965
+cat__tournament_Arab Cup,0.0002792430813000397
+cat__tournament_Cyprus International Tournament,0.00020568631261615202
+cat__tournament_UNCAF Cup,0.0001985628037093193
+cat__tournament_Baltic Cup,0.00019445535500988188
+cat__tournament_Nehru Cup,0.0001937605078111543
+cat__tournament_ABCS Tournament,0.0001632190336810185
+cat__tournament_CONCACAF Nations League qualification,0.00015979608280762718
+cat__tournament_Coupe de l'Outre-Mer,0.0001511795452392648
+cat__tournament_COSAFA Cup qualification,0.00014297736651061913
+cat__tournament_Kirin Cup,0.00013818073818230145
+cat__tournament_King's Cup,0.00013793692658443062
+cat__tournament_Kirin Challenge Cup,0.0001314233751141504
+cat__tournament_Merdeka Tournament,9.688946320242088e-05
+cat__tournament_Arab Cup qualification,8.521827591852794e-05
+cat__tournament_EAFF Championship,7.883318844069711e-05
+cat__tournament_South Pacific Games,6.956880685936389e-05
+cat__tournament_Intercontinental Cup,6.202604443396034e-05
+cat__tournament_Mahinda Rajapaksa Cup,5.804150843644753e-05
+cat__tournament_Superclásico de las Américas,5.269452302232795e-05
+cat__tournament_Oceania Nations Cup,4.543637559893501e-05
+cat__tournament_Nile Basin Tournament,3.357300272971917e-05
+cat__tournament_Windward Islands Tournament,3.2129795042068865e-05
+cat__tournament_ELF Cup,2.714549632291246e-05
+cat__tournament_Malta International Tournament,2.6260443649172462e-05
+cat__tournament_Pacific Games,2.4650954687645066e-05
+cat__tournament_VFF Cup,2.2668418472643575e-05
+cat__tournament_Gold Cup qualification,1.9398096209727735e-05
+cat__tournament_Copa del Pacífico,1.3057666292004513e-05
+cat__tournament_Pacific Mini Games,1.0646993358022838e-05
+cat__tournament_Navruz Cup,1.0164000337020054e-05
+cat__tournament_Copa Paz del Chaco,5.431024278886252e-06
+cat__tournament_Three Nations Cup,1.8075333609563645e-06
+cat__tournament_Copa Confraternidad,0.0
+cat__tournament_CONMEBOL–UEFA Cup of Champions,0.0
+cat__tournament_Corsica Cup,0.0
+cat__tournament_Copa América qualification,0.0
+cat__tournament_Nations Cup,0.0
+cat__tournament_Island Games,0.0

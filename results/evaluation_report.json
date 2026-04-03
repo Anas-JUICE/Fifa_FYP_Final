@@ -1,0 +1,83 @@
+{
+  "best_model_name": "logistic",
+  "selection_summary": {
+    "selection_rule": [
+      "highest balanced accuracy",
+      "highest accuracy",
+      "lowest log loss"
+    ],
+    "best_model_name": "logistic",
+    "comparison_table_path": "C:\\Users\\anasb\\Desktop\\Fifa_FYP_Final\\results\\model_comparison.csv",
+    "chosen_metrics": {
+      "accuracy": 0.5797938144329897,
+      "balanced_accuracy": 0.5397091337877072,
+      "log_loss": 0.8914379900838775,
+      "training_seconds": 0.20526432991027832,
+      "draw_recall": 0.2768959435626102,
+      "draw_f1": 0.29182156133828996
+    }
+  },
+  "metrics": {
+    "model_name": "logistic",
+    "train_rows": 9699,
+    "test_rows": 2425,
+    "train_date_min": "2006-02-28",
+    "train_date_max": "2022-06-02",
+    "test_date_min": "2022-06-02",
+    "test_date_max": "2026-01-25",
+    "training_seconds": 0.20526432991027832,
+    "accuracy": 0.5797938144329897,
+    "balanced_accuracy": 0.5397091337877072,
+    "log_loss": 0.8914379900838775,
+    "classification_report": {
+      "0": {
+        "precision": 0.7256214149139579,
+        "recall": 0.6764705882352942,
+        "f1-score": 0.7001845018450185,
+        "support": 1122.0
+      },
+      "1": {
+        "precision": 0.30844793713163066,
+        "recall": 0.2768959435626102,
+        "f1-score": 0.29182156133828996,
+        "support": 567.0
+      },
+      "2": {
+        "precision": 0.5632183908045977,
+        "recall": 0.6657608695652174,
+        "f1-score": 0.6102117061021171,
+        "support": 736.0
+      },
+      "accuracy": 0.5797938144329897,
+      "macro avg": {
+        "precision": 0.5324292476167288,
+        "recall": 0.5397091337877072,
+        "f1-score": 0.5340725897618085,
+        "support": 2425.0
+      },
+      "weighted avg": {
+        "precision": 0.5787900798017647,
+        "recall": 0.5797938144329897,
+        "f1-score": 0.5773961451711667,
+        "support": 2425.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        759,
+        209,
+        154
+      ],
+      [
+        184,
+        157,
+        226
+      ],
+      [
+        103,
+        143,
+        490
+      ]
+    ]
+  }
+}
