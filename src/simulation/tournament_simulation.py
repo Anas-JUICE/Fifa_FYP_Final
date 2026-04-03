@@ -257,4 +257,4 @@ def run_simulation(iterations: int = 10000):
     print(f"Saved seeded groups to     : {RESULTS_DIR / 'auto_seeded_groups.csv'}")
 
 if __name__ == "__main__":
-    run_simulation(iterations=100)
+    run_simulation(iterations=10000)
