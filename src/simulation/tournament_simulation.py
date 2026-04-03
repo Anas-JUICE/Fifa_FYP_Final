@@ -196,7 +196,7 @@ def simulate_knockout(qualifiers_df: pd.DataFrame):
         "champion": champion
     }
 
-def run_simulation(iterations: int = 100):
+def run_simulation(iterations: int = 10000):
     profiles_df = load_team_profiles()
     groups = seed_48_teams_by_elo(profiles_df)
 
