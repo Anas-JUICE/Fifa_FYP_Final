@@ -12123,3 +12123,13 @@ date,team_A,team_B,goals_A,goals_B,tournament,city,country,neutral,elo_A,elo_B,e
 2026-01-18,Grenada,Jamaica,0,1,Friendly,St. George's,Grenada,False,1122.0,1527.0,-405.0,2,3.0,0.0,2.0,2.0,1.2,0.8,2.0,1.0,2.0,1.8,1.2,0.6000000000000001,1.0
 2026-01-22,Panama,Mexico,0,1,Friendly,Panama City,Panama,False,1742.0,1835.0,-93.0,2,1.0,4.0,0.0,1.2,1.0,0.19999999999999996,0.0,3.0,2.0,0.4,1.4,-0.9999999999999999,1.0
 2026-01-25,Bolivia,Mexico,0,1,Friendly,Santa Cruz,Bolivia,False,1675.0,1835.0,-160.0,2,2.0,1.0,2.0,0.6,1.4,-0.7999999999999999,1.0,2.0,2.0,0.6,1.4,-0.7999999999999999,1.0
+2026-01-25,Bosnia and Herzegovina,Spain,0,2,Friendly,Sarajevo,Bosnia and Herzegovina,False,1500.0,2100.0,-600.0,2,2.0,1.0,2.0,1.2,1.1,0.1,4.0,1.0,0.0,2.0,0.6,1.4,1.0
+2026-01-25,Cape Verde,Spain,0,2,Friendly,Praia,Cape Verde,False,1500.0,2100.0,-600.0,2,2.0,1.0,2.0,1.2,1.1,0.1,4.0,1.0,0.0,2.0,0.6,1.4,1.0
+2026-01-25,Czechia,Spain,0,2,Friendly,Prague,Czechia,False,1500.0,2100.0,-600.0,2,2.0,1.0,2.0,1.2,1.1,0.1,4.0,1.0,0.0,2.0,0.6,1.4,1.0
+2026-01-25,DR Congo,Spain,0,2,Friendly,Kinshasa,DR Congo,False,1500.0,2100.0,-600.0,2,2.0,1.0,2.0,1.2,1.1,0.1,4.0,1.0,0.0,2.0,0.6,1.4,1.0
+2026-01-25,Ivory Coast,Spain,0,2,Friendly,Abidjan,Ivory Coast,False,1500.0,2100.0,-600.0,2,2.0,1.0,2.0,1.2,1.1,0.1,4.0,1.0,0.0,2.0,0.6,1.4,1.0
+2026-01-25,Korea Republic,Spain,0,2,Friendly,Seoul,Korea Republic,False,1500.0,2100.0,-600.0,2,2.0,1.0,2.0,1.2,1.1,0.1,4.0,1.0,0.0,2.0,0.6,1.4,1.0
+2026-01-25,New Zealand,Spain,0,2,Friendly,Auckland,New Zealand,False,1500.0,2100.0,-600.0,2,2.0,1.0,2.0,1.2,1.1,0.1,4.0,1.0,0.0,2.0,0.6,1.4,1.0
+2026-01-25,Saudi Arabia,Spain,0,2,Friendly,Riyadh,Saudi Arabia,False,1500.0,2100.0,-600.0,2,2.0,1.0,2.0,1.2,1.1,0.1,4.0,1.0,0.0,2.0,0.6,1.4,1.0
+2026-01-25,South Africa,Spain,0,2,Friendly,Johannesburg,South Africa,False,1500.0,2100.0,-600.0,2,2.0,1.0,2.0,1.2,1.1,0.1,4.0,1.0,0.0,2.0,0.6,1.4,1.0
+2026-01-25,United States,Spain,0,2,Friendly,New York,United States,False,1500.0,2100.0,-600.0,2,2.0,1.0,2.0,1.2,1.1,0.1,4.0,1.0,0.0,2.0,0.6,1.4,1.0

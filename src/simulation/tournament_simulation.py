@@ -11,6 +11,20 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+def load_official_groups():
+    groups_path = ROOT / "data" / "official" / "worldcup_2026_groups.csv"
+
+    if not groups_path.exists():
+        raise FileNotFoundError(f"Official groups file not found: {groups_path}")
+
+    df = pd.read_csv(groups_path)
+
+    groups = {}
+    for group_name, group_df in df.groupby("group"):
+        groups[group_name] = group_df["team"].tolist()
+
+    return groups
+
 ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "src"
 if str(SRC) not in sys.path:
@@ -198,7 +212,7 @@ def simulate_knockout(qualifiers_df: pd.DataFrame):
 
 def run_simulation(iterations: int = 10000):
     profiles_df = load_team_profiles()
-    groups = seed_48_teams_by_elo(profiles_df)
+    groups = load_official_groups()
 
     qualify_counts = Counter()
     qf_counts = Counter()
@@ -240,7 +254,7 @@ def run_simulation(iterations: int = 10000):
         [(group, ", ".join(teams)) for group, teams in groups.items()],
         columns=["group", "teams"]
     )
-    seed_info.to_csv(RESULTS_DIR / "auto_seeded_groups.csv", index=False)
+    seed_info.to_csv(RESULTS_DIR / "official_groups_used.csv", index=False)
 
     plot_df = result.head(15).sort_values("champion_probability", ascending=True)
     plt.figure(figsize=(8, 6))
